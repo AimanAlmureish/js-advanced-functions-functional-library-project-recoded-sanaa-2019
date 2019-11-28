@@ -47,12 +47,12 @@
             }
 
             if (!acc) {
-              acc = array[0]
-              for(let i = 1; i <= array.length - 1; i++){
-                acc = callback(acc, array[i], array)
-                console.log(acc)
+              acc = array[0];
+              for (let i = 1; i <= array.length - 1; i++) {
+                acc = callback(acc, array[i], array);
+                console.log(acc);
               }
-              console.log(acc)
+              console.log(acc);
               return acc;
             }
           },
@@ -177,79 +177,81 @@
           uniq: function(array, isSorted, callback) {
             let unique = [];
             let unique1 = [];
-            
-            if(callback !== undefined){
-            for (const key in array) {
-              if (array.hasOwnProperty(key)) {
+            let superUnique = [];
+            let doubleUnique = [];
 
-                if(callback(array[key]) !== 0 && callback(array[key]) !== undefined){
-              console.log(callback(array[key]))
+            if (callback !== undefined) {
+              for (const key in array) {
+                if (array.hasOwnProperty(key)) {
+                  if (callback(array[key]) !== undefined) {
+                    // console.log(callback(array[key]))
 
-                unique1.push(callback(array[key]);                  
+                    unique1.push(callback(array[key]));
+                  }
                 }
               }
+
+              console.log(unique1);
+              unique = [...new Set(unique1)];
+              superUnique = [...new Set(array)];
+              for (let i = 0; i < unique.length; i++) {
+                for (let j = 0; j < superUnique.length; j++) {
+                  if (i === j) {
+                    console.log(unique[i], superUnique[j]);
+                    doubleUnique.push(superUnique[j]);
+                  }
+                }
+              }
+
+              return doubleUnique;
             }
 
-              console.log(unique1)
-              unique = [...new Set(unique1)]
-              unique.push(3)
-              
+            if (callback === undefined) {
+              unique = [...new Set(array)];
               return unique;
-            
             }
-            
-            if(callback === undefined){
-                unique = [...new Set(array)];
-                return unique
-                }
-          },
-          
-          keys: function(object){
-            let arr = []
-            for (const key in object) {
-              if (object.hasOwnProperty(key)) {
-                const element = key
-                console.log(element)
-                arr.push(element)
-
-              }
-          }
-
-          return arr
           },
 
-          values: function(object){
-            let arr = []
+          keys: function(object) {
+            let arr = [];
             for (const key in object) {
               if (object.hasOwnProperty(key)) {
-                const element = object[key]
-                console.log(element)
-                arr.push(element)
-
+                const element = key;
+                console.log(element);
+                arr.push(element);
               }
-          }
+            }
 
-          return arr
+            return arr;
+          },
+
+          values: function(object) {
+            let arr = [];
+            for (const key in object) {
+              if (object.hasOwnProperty(key)) {
+                const element = object[key];
+                console.log(element);
+                arr.push(element);
+              }
+            }
+
+            return arr;
           },
           functions: function(object) {
-            let arr = []
+            let arr = [];
             for (const key in object) {
               if (object.hasOwnProperty(key)) {
-                const element = object[key]
+                const element = object[key];
                 if (typeof element === "function") {
                   console.log(element);
                   arr.push(element);
                 }
-
               }
-          }   
-          return arr.sort();
+            }
+            return arr.sort();
           },
-          
-          giveMeMore: function(){
 
-            
-          }
+          giveMeMore: function() {}
         };
       })();
 
